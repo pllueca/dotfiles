@@ -24,7 +24,7 @@ NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'easymotion/vim-easymotion'
 NeoBundle 'aykamko/vim-python-pep8-indent'
-
+NeoBundle 'davidhalter/jedi-vim' 
 
 
 " You can specify revision/branch/tag.
