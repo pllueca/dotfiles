@@ -1,4 +1,5 @@
 "NeoBundle Scripts-----------------------------
+
 if has('vim_starting')
   " Required:
   set runtimepath+=/Users/brinon/.config/nvim/bundle/neobundle.vim/
@@ -24,6 +25,8 @@ NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'easymotion/vim-easymotion'
 NeoBundle 'aykamko/vim-python-pep8-indent'
+NeoBundle 'ervandew/supertab'
+NeoBundle 'Raimondi/delimitMate' 
 NeoBundle 'davidhalter/jedi-vim' 
 
 
@@ -53,16 +56,19 @@ set pastetoggle=<F3>
 "NERDTree
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
-let NERDTreeIgnore = ['\.pyc$']
-
+let NERDTreeShowHidden=1
+let NERDTreeIgnore = ['\.pyc$', '.*DS_Score.*']
 
 "TEMP
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+"noremap <Up> <NOP>
+"noremap <Down> <NOP>
+"noremap <Left> <NOP>
+"noremap <Right> <NOP>
+"inoremap <esc>   <NOP>
 
-:imap jk <Esc>
+":inoremap jk <Esc>
+:inoremap jj <Esc>
+
 " map ; to : and viceversa
 nnoremap : ;
 nnoremap ; :
@@ -115,10 +121,12 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 
 " commant-t
-set wildignore=*.swp,*pyc,*.bak,*png,*tif
+set wildignore=*.swp,*.pyc,*.bak,*png,*tif
 
 filetype plugin indent on
 set autoindent
+
+set colorcolumn=100
 
 
 " Inca linting
@@ -161,4 +169,8 @@ autocmd FileType python setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 " automagically run Neomake on save
 autocmd! BufWritePost * Neomake
 
+"jedi-vim
+let g:jedi#auto_initialization = 0
+let g:jedi#show_call_signatures = "1"
+let b:delimitMate_autoclose = 1 
 

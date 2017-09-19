@@ -8,7 +8,9 @@ export ZSH=/Users/brinon/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 
-ZSH_THEME="robbyrussell"
+#ZSH_THEME="robbyrussell"
+#ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="agnoster"
 
 
 # Uncomment the following line to use case-sensitive completion.
@@ -22,7 +24,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+export UPDATE_ZSH_DAYS=7
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -31,7 +33,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -54,7 +56,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #
-plugins=(git docker github osx pip python)
+plugins=(git docker github osx pip python )
 
 source $ZSH/oh-my-zsh.sh
 
@@ -63,21 +65,21 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
 #   export EDITOR='mvim'
 # fi
-export EDITOR='vim'
+export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
+ export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -104,12 +106,35 @@ alias incaenv="source activate inca-env"
 alias dcDown="docker-compose down"
 alias dcUp="docker-compose up"
 alias dcBuild="docker-compose build"
+alias dcReload="docker-compose down && docker-compose up"
+
+function dcRun() {
+  docker-compose run --rm "$@"
+}
+
+alias reload="source ~/.zshrc"
 
 # editor
 alias vim="nvim"
 
 # inca
-alias inca_test="docker-compose run inca-tasks python -m unittest discover -v inca/unit_tests/"
+alias inca_test="docker-compose run --rm inca-tasks python -m unittest discover -v inca/unit_tests/"
+alias inca_lint="docker-compose run --rm inca-tasks python inca/unit_tests/test_lint.py"
 
-# misc
+
+# ssh agent
+eval $(ssh-agent -s)
+ssh-add -A -K
+
+# pip zsh completion start
+function _pip_completion {
+  local words cword
+  read -Ac words
+  read -cn cword
+  reply=( $( COMP_WORDS="$words[*]" \
+             COMP_CWORD=$(( cword-1 )) \
+             PIP_AUTO_COMPLETE=1 $words[1] ) )
+}
+compctl -K _pip_completion pip
+# pip zsh completion end
 
