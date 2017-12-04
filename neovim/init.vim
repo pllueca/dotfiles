@@ -1,5 +1,4 @@
 "NeoBundle Scripts-----------------------------
-
 if has('vim_starting')
   " Required:
   set runtimepath+=/Users/brinon/.config/nvim/bundle/neobundle.vim/
@@ -28,6 +27,8 @@ NeoBundle 'aykamko/vim-python-pep8-indent'
 NeoBundle 'ervandew/supertab'
 NeoBundle 'Raimondi/delimitMate' 
 NeoBundle 'davidhalter/jedi-vim' 
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'fatih/vim-go'
 
 
 " You can specify revision/branch/tag.
@@ -44,8 +45,6 @@ filetype plugin indent on
 NeoBundleCheck
 "End NeoBundle Scripts-------------------------
 "
-"
-
 
 syntax on
 syntax enable
@@ -57,16 +56,15 @@ set pastetoggle=<F3>
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDTreeShowHidden=1
-let NERDTreeIgnore = ['\.pyc$', '.*DS_Score.*']
+let NERDTreeIgnore = ['\.pyc$', '.DS_Store']
 
 "TEMP
 "noremap <Up> <NOP>
 "noremap <Down> <NOP>
 "noremap <Left> <NOP>
 "noremap <Right> <NOP>
-"inoremap <esc>   <NOP>
+inoremap <esc>   <NOP>
 
-":inoremap jk <Esc>
 :inoremap jj <Esc>
 
 " map ; to : and viceversa
@@ -104,6 +102,7 @@ set statusline=%<\ %f\ %{fugitive#statusline()}
 set mouse=a
 
 "more remaps
+" <space> as leader
 nnoremap <space> <Nop>
 let mapleader=" "
 "map <space> \
@@ -165,7 +164,6 @@ let g:python_pep8_hanging_indent_width = 4
 
 " automagically set indent to 2 for python
 autocmd FileType python setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
-
 " automagically run Neomake on save
 autocmd! BufWritePost * Neomake
 
@@ -173,4 +171,17 @@ autocmd! BufWritePost * Neomake
 let g:jedi#auto_initialization = 0
 let g:jedi#show_call_signatures = "1"
 let b:delimitMate_autoclose = 1 
+
+"use system clipboard
+set clipboard=unnamed
+
+" Backups
+set backupdir=/tmp//,.
+set directory=/tmp//,.
+if v:version >= 703
+  set undodir=/tmp//,.
+endif
+
+" custom functions and shit
+com! FormatJSON %!python -m json.tool
 

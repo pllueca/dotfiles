@@ -73,13 +73,16 @@ export LC_ALL=en_US.UTF-8
 # else
 #   export EDITOR='mvim'
 # fi
-export EDITOR='nvim'
+#
+export VIM8='/usr/local/Cellar/vim/8.0.1200/bin/vim'
+export MACVIM='/Applications/MacVim.app/Contents/bin/mvim'
+export EDITOR="nvim"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
- export SSH_KEY_PATH="~/.ssh/id_rsa"
+export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -92,7 +95,7 @@ export EDITOR='nvim'
 alias imgcat="sh ~/Repos/imgcat/imgcat.sh"
 
 # added by Anaconda2 4.3.0 installer
-export PATH="/Users/brinon/anaconda/bin:$PATH"
+export PATH="/Users/brinon/anaconda2/bin:$PATH"
 export PYTHONPATH="/Users/brinon/crowdAI/inca:$PYTHONPATH"
 
 
@@ -101,24 +104,31 @@ export PYTHONPATH="/Users/brinon/crowdAI/inca:$PYTHONPATH"
 alias py="python"
 alias ipy="ipython"
 alias incaenv="source activate inca-env"
+alias incapy="docker-compose run --rm inca-tasks python"
+alias incaipy="docker-compose run --rm inca-tasks ipython"
 
 # docker-compose
-alias dcDown="docker-compose down"
-alias dcUp="docker-compose up"
-alias dcBuild="docker-compose build"
-alias dcReload="docker-compose down && docker-compose up"
+alias dc="docker-compose"
+alias dcdown="docker-compose down"
+alias dcup="docker-compose up"
+alias dcbuild="docker-compose build"
+alias dcreload="docker-compose down && docker-compose up"
 
-function dcRun() {
+function dcrun() {
   docker-compose run --rm "$@"
 }
 
+# random usefull
 alias reload="source ~/.zshrc"
+alias myip="curl ipinfo.io/ip"
+alias inca="cd ~/crowdai/inca"
 
 # editor
 alias vim="nvim"
+#alias vim="$MACVIM"
 
 # inca
-alias inca_test="docker-compose run --rm inca-tasks python -m unittest discover -v inca/unit_tests/"
+alias inca_test="docker-compose run --rm inca-tasks python -m unittest discover -v inca/t/unit/"
 alias inca_lint="docker-compose run --rm inca-tasks python inca/unit_tests/test_lint.py"
 
 
@@ -138,3 +148,15 @@ function _pip_completion {
 compctl -K _pip_completion pip
 # pip zsh completion end
 
+
+
+# github
+export HOMEBREW_GITHUB_API_TOKEN="d9550d726f2a391dc0bc3643655031f2c8700455"
+
+export VAULT_ADDR='https://vault.crowdai.com'
+
+export GOPATH=/Users/brinon/Repos/Go
+
+
+alias ...=../..
+export PATH="/usr/local/opt/curl/bin:$PATH"
