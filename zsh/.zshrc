@@ -104,10 +104,14 @@ export PYTHONPATH="/Users/brinon/crowdAI/inca:$PYTHONPATH"
 alias py="python"
 alias ipy="ipython"
 alias incaenv="source activate inca-env"
-alias incapy="docker-compose run --rm inca-tasks python"
-alias incaipy="docker-compose run --rm inca-tasks ipython"
+alias incapy="docker-compose -f ~/crowdai/inca/docker-compose.yml run --rm inca-tasks python"
+alias incaipy="docker-compose -f ~/crowdai/inca/docker-compose.yml run --rm inca-tasks ipython"
 
 # docker-compose
+alias docker_stop_all='docker stop $(docker ps -a -q)'
+alias docker_rm_all='docker rm $(docker ps -a -q)'
+alias docker_rm_imgs='sudo docker rmi $(sudo docker images -q)'
+
 alias dc="docker-compose"
 alias dcdown="docker-compose down"
 alias dcup="docker-compose up"
