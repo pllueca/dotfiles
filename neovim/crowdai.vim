@@ -1,5 +1,13 @@
 " Inca linting
-let s:inca_root = '/Users/brinon/crowdAI/inca'
+if has("unix")
+  let s:uname = system("uname")
+  if s:uname == "Darwin\n"
+    " Do Mac stuff here
+    let s:inca_root = '/Users/brinon/crowdAI/inca'
+  else
+    let s:inca_root = '~/projects/inca'
+  endif
+endif
 
 " enable and configure pylint linter
 if executable('pylint')

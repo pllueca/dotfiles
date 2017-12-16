@@ -1,11 +1,11 @@
 "NeoBundle Scripts-----------------------------
 if has('vim_starting')
   " Required:
-  set runtimepath+=/Users/brinon/.config/nvim/bundle/neobundle.vim/
+  set runtimepath+=~/.config/nvim/bundle/neobundle.vim/
 endif
 
 " Required:
-call neobundle#begin(expand('/Users/brinon/.config/nvim/bundle'))
+call neobundle#begin(expand('~/.config/nvim/bundle'))
 
 " Let NeoBundle manage NeoBundle
 " Required:
