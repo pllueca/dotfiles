@@ -36,7 +36,7 @@ export UPDATE_ZSH_DAYS=7
 ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+ COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -90,7 +90,7 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
+ alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias imgcat="sh ~/Repos/imgcat/imgcat.sh"
 
@@ -164,3 +164,7 @@ export GOPATH=/Users/brinon/Repos/Go
 
 alias ...=../..
 export PATH="/usr/local/opt/curl/bin:$PATH"
+
+inca-pdb() {
+    docker-compose -f ~/crowdai/inca/docker-compose.yml exec $1 bash -c "sleep 0.1 && rlwrap nc ${3:-127.0.0.1} ${2:-4444}"
+}

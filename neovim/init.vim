@@ -29,6 +29,8 @@ NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'davidhalter/jedi-vim' 
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'fatih/vim-go'
+NeoBundle 'tpope/vim-sleuth'
+NeoBundle 'itchyny/lightline.vim'
 
 
 " You can specify revision/branch/tag.
@@ -58,12 +60,12 @@ let NERDTreeDirArrows = 1
 let NERDTreeShowHidden=1
 let NERDTreeIgnore = ['\.pyc$', '.DS_Store']
 
-"TEMP
+"TEMP, L2vim
 "noremap <Up> <NOP>
 "noremap <Down> <NOP>
 "noremap <Left> <NOP>
 "noremap <Right> <NOP>
-inoremap <esc>   <NOP>
+"inoremap <esc> <NOP>
 
 :inoremap jj <Esc>
 
@@ -96,7 +98,7 @@ set splitright
 "nnoremap <C-h> gT
 
 "fugitive git integration
-set statusline=%<\ %f\ %{fugitive#statusline()}
+"set statusline=%<\ %f\ %{fugitive#statusline()}
 
 "mouse support
 set mouse=a
@@ -108,6 +110,10 @@ let mapleader=" "
 "map <space> \
 map <leader>w <leader><leader>w
 map <leader>b <leader><leader>b
+
+" code folding
+set foldmethod=indent
+set foldlevel=99
 
 "open nerdtree when vim is run w/out args
 autocmd StdinReadPre * let s:std_in=1
@@ -143,6 +149,10 @@ let g:jedi#auto_initialization = 0
 let g:jedi#show_call_signatures = "1"
 let b:delimitMate_autoclose = 1 
 
+" lightline
+let g:lightline = { 'colorscheme': 'wombat' } 
+      
+
 "use system clipboard
 set clipboard=unnamed
 
@@ -155,6 +165,7 @@ endif
 
 " custom functions and shit
 com! FormatJSON %!python -m json.tool
+com! Fmt Neoformat
 
 "Crowdai specific
 source ~/.config/nvim/crowdai.vim
