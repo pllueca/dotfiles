@@ -17,7 +17,6 @@ NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'wincent/command-t'
 NeoBundle 'neomake/neomake'
 NeoBundle 'sbdchd/neoformat'
 NeoBundle 'scrooloose/nerdcommenter'
@@ -125,7 +124,6 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "hi link EasyMotionTarget2Second Search
 
 
-" commant-t
 set wildignore=*.swp,*.pyc,*.bak,*png,*tif
 
 filetype plugin indent on
