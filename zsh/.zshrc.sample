@@ -155,7 +155,7 @@ compctl -K _pip_completion pip
 
 
 # github
-export HOMEBREW_GITHUB_API_TOKEN="1bb6dff06efef0344f64f21aa7c1595fff86327d"
+export HOMEBREW_GITHUB_API_TOKEN="<YOUR TOKEN HERE>"
 
 # crowdAI ssh
 export VAULT_ADDR='https://vault.crowdai.com'
