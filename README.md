@@ -27,6 +27,10 @@ ln -s ~/dotfiles/neovim/crowdai.vim ~/.config/nvim/crowdai.vim
 ## tmux
 
 ```bash
-ln ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
+ln -s -f ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
+ln -s -f ~/dotfiles/tmux/tmux.conf.local ~/.tmux.conf.local
 ```
+
+## ZSH
+
 
