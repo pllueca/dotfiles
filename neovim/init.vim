@@ -12,8 +12,6 @@ call neobundle#begin(expand('~/.config/nvim/bundle'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Add or remove your Bundles here:
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'flazz/vim-colorschemes'
@@ -23,14 +21,12 @@ NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'easymotion/vim-easymotion'
 NeoBundle 'aykamko/vim-python-pep8-indent'
-NeoBundle 'ervandew/supertab'
 NeoBundle 'Raimondi/delimitMate' 
-NeoBundle 'davidhalter/jedi-vim' 
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'fatih/vim-go'
 NeoBundle 'tpope/vim-sleuth'
 NeoBundle 'itchyny/lightline.vim'
-
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'Valloric/YouCompleteMe'
+NeoBundle 'ervandew/supertab'
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
@@ -67,6 +63,7 @@ let NERDTreeIgnore = ['\.pyc$', '.DS_Store']
 "inoremap <esc> <NOP>
 
 :inoremap jj <Esc>
+:inoremap JJ <Esc>
 
 " map ; to : and viceversa
 nnoremap : ;
@@ -142,14 +139,29 @@ autocmd FileType python setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 " automagically run Neomake on save
 autocmd! BufWritePost * Neomake
 
-"jedi-vim
-let g:jedi#auto_initialization = 0
-let g:jedi#show_call_signatures = "1"
 let b:delimitMate_autoclose = 1 
 
 " lightline
 let g:lightline = { 'colorscheme': 'wombat' } 
-      
+
+" indent guides
+"
+let g:indent_guides_enable_on_vim_startup = 0
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+
+"YouCompleteMe
+let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
+let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
+let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
+let g:ycm_complete_in_comments = 1 " Completion in comments
+let g:ycm_complete_in_strings = 1 " Completion in string
+
+let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+
+" Goto definition with F3
+map <F3> :YcmCompleter GoTo<CR>
 
 "use system clipboard
 set clipboard=unnamed

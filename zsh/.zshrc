@@ -155,9 +155,16 @@ compctl -K _pip_completion pip
 
 
 # github
-export HOMEBREW_GITHUB_API_TOKEN="d9550d726f2a391dc0bc3643655031f2c8700455"
+export HOMEBREW_GITHUB_API_TOKEN="1bb6dff06efef0344f64f21aa7c1595fff86327d"
 
+# crowdAI ssh
 export VAULT_ADDR='https://vault.crowdai.com'
+export CROWDAI_KEY_NAME=crowdai_rsa
+export PATH="/Users/brinon/crowdAI/ssh-crowdai/bin:$PATH"
+
+alias sshc="ssh-crowdai -i ~/.ssh/$CROWDAI_KEY_NAME"
+
+
 
 export GOPATH=/Users/brinon/Repos/Go
 
