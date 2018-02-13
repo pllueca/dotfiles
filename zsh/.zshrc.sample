@@ -82,7 +82,7 @@ export EDITOR="nvim"
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-export SSH_KEY_PATH="~/.ssh/id_rsa"
+export SSH_KEY_PATH="<Your ssh key location>"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -103,9 +103,6 @@ export PYTHONPATH="/Users/brinon/crowdAI/inca:$PYTHONPATH"
 # python
 alias py="python"
 alias ipy="ipython"
-alias incaenv="source activate inca-env"
-alias incapy="docker-compose -f ~/crowdai/inca/docker-compose.yml run --rm inca-tasks python"
-alias incaipy="docker-compose -f ~/crowdai/inca/docker-compose.yml run --rm inca-tasks ipython"
 
 # docker-compose
 alias docker_stop_all='docker stop $(docker ps -a -q)'
@@ -125,16 +122,9 @@ function dcrun() {
 # random usefull
 alias reload="source ~/.zshrc"
 alias myip="curl ipinfo.io/ip"
-alias inca="cd ~/crowdai/inca"
 
 # editor
 alias vim="nvim"
-#alias vim="$MACVIM"
-
-# inca
-alias inca_test="docker-compose run --rm inca-tasks python -m unittest discover -v inca/t/unit/"
-alias inca_lint="docker-compose run --rm inca-tasks python inca/unit_tests/test_lint.py"
-
 
 # ssh agent
 eval $(ssh-agent -s)
@@ -157,21 +147,9 @@ compctl -K _pip_completion pip
 # github
 export HOMEBREW_GITHUB_API_TOKEN="<YOUR TOKEN HERE>"
 
-# crowdAI ssh
-export VAULT_ADDR='https://vault.crowdai.com'
-export CROWDAI_KEY_NAME=crowdai_rsa
-export PATH="/Users/brinon/crowdAI/ssh-crowdai/bin:$PATH"
-
-alias sshc="ssh-crowdai -i ~/.ssh/$CROWDAI_KEY_NAME"
-
-
 
 export GOPATH=/Users/brinon/Repos/Go
 
 
 alias ...=../..
 export PATH="/usr/local/opt/curl/bin:$PATH"
-
-inca-pdb() {
-    docker-compose -f ~/crowdai/inca/docker-compose.yml exec $1 bash -c "sleep 0.1 && rlwrap nc ${3:-127.0.0.1} ${2:-4444}"
-}

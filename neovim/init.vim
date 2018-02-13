@@ -107,6 +107,10 @@ let mapleader=" "
 map <leader>w <leader><leader>w
 map <leader>b <leader><leader>b
 
+"NERDTree
+"nnoremap <leader>n <NOP>
+"map <leader>n NERDTreeToggle 
+
 " code folding
 set foldmethod=indent
 set foldlevel=99
