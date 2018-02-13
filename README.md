@@ -9,7 +9,7 @@ My dotfiles
 brew install neovim
 
 # Ubuntu
-wgt https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
 tar -xzf nvim-linux64.tar.gz && rm nvim-linux64.tar.gz
 echo "export PATH=$PATH:~/nvim-linux64/bin" >> .bashrc
 
