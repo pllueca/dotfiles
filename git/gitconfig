@@ -1,0 +1,20 @@
+[user]
+  name = Pablo Llueca
+  email = pau@crowdai.com
+  username = Brinon
+[core]
+  editor = nvim
+  excludesfile = ~/.gitignore
+[alias]
+  ec = config --global -e
+  co = checkout
+  cob = checkout -b  # create branch
+  call = commit --all
+  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+
+  p = push
+  pl = pull
+
+  wip = !git add -u && git commit -m "WIP"
+  undo = reset HEAD~1 --mixed
+
