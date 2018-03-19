@@ -1,4 +1,5 @@
 "NeoBundle Scripts-----------------------------
+
 if has('vim_starting')
   " Required:
   set runtimepath+=~/.config/nvim/bundle/neobundle.vim/
@@ -27,6 +28,7 @@ NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'ervandew/supertab'
+NeoBundle 'zah/nim.vim'
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
@@ -94,7 +96,7 @@ set splitright
 "nnoremap <C-h> gT
 
 "fugitive git integration
-"set statusline=%<\ %f\ %{fugitive#statusline()}
+set statusline=%<\ %f\ %{fugitive#statusline()}
 
 "mouse support
 set mouse=a
@@ -107,9 +109,6 @@ let mapleader=" "
 map <leader>w <leader><leader>w
 map <leader>b <leader><leader>b
 
-"NERDTree
-"nnoremap <leader>n <NOP>
-"map <leader>n NERDTreeToggle 
 
 " code folding
 set foldmethod=indent
@@ -144,6 +143,20 @@ autocmd FileType python setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 autocmd! BufWritePost * Neomake
 
 let b:delimitMate_autoclose = 1 
+
+
+" nim
+fun! JumpToDef()
+  if exists("*GotoDefinition_" . &filetype)
+    call GotoDefinition_{&filetype}()
+  else
+    exe "norm! \<C-]>"
+  endif
+endf
+
+" Jump to tag
+nn <M-g> :call JumpToDef()<cr>
+ino <M-g> <esc>:call JumpToDef()<cr>i
 
 " lightline
 let g:lightline = { 'colorscheme': 'wombat' } 
