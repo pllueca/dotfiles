@@ -56,7 +56,7 @@ ENABLE_CORRECTION="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #
-plugins=(git docker github osx pip python )
+plugins=(git docker github osx pip python)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -78,57 +78,44 @@ export VIM8='/usr/local/Cellar/vim/8.0.1200/bin/vim'
 export MACVIM='/Applications/MacVim.app/Contents/bin/mvim'
 export EDITOR="nvim"
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+#bindkey -v 
 
-# ssh
-export SSH_KEY_PATH="<Your ssh key location>"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
 #
 # Example aliases
  alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias imgcat="sh ~/Repos/imgcat/imgcat.sh"
 
-# added by Anaconda2 4.3.0 installer
-export PATH="/Users/brinon/anaconda2/bin:$PATH"
-export PYTHONPATH="/Users/brinon/crowdAI/inca:$PYTHONPATH"
-
 
 # some alias
+alias bim='vim'
 # python
 alias py="python"
 alias ipy="ipython"
+alias incaenv="source activate inca-env"
 
 # docker-compose
-alias docker_stop_all='docker stop $(docker ps -a -q)'
-alias docker_rm_all='docker rm $(docker ps -a -q)'
-alias docker_rm_imgs='sudo docker rmi $(sudo docker images -q)'
+alias docker-stop-all='docker stop $(docker ps -a -q)'
+alias docker-rm-all='docker rm $(docker ps -a -q)'
+alias docker-rm-imgs='sudo docker rmi $(sudo docker images -q)'
 
 alias dc="docker-compose"
-alias dcdown="docker-compose down"
-alias dcup="docker-compose up"
-alias dcbuild="docker-compose build"
-alias dcreload="docker-compose down && docker-compose up"
 
 function dcrun() {
   docker-compose run --rm "$@"
 }
 
+alias k="kubectl"
+
 # random usefull
 alias reload="source ~/.zshrc"
 alias myip="curl ipinfo.io/ip"
+alias inca="cd ~/crowdai/inca"
 
 # editor
 alias vim="nvim"
-
-# ssh agent
-eval $(ssh-agent -s)
-ssh-add -A -K
+alias v="nvim"
 
 # pip zsh completion start
 function _pip_completion {
@@ -142,14 +129,38 @@ function _pip_completion {
 compctl -K _pip_completion pip
 # pip zsh completion end
 
-
-
-# github
-export HOMEBREW_GITHUB_API_TOKEN="<YOUR TOKEN HERE>"
-
-
+# Go
 export GOPATH=/Users/brinon/Repos/Go
 
+# nim
+export PATH=/Users/brinon/.nimble/bin:$PATH
 
 alias ...=../..
 export PATH="/usr/local/opt/curl/bin:$PATH"
+
+# added by Anaconda2 5.0.1 installer
+export PATH="/Users/brinon/anaconda2/bin:$PATH"
+
+# added by Anaconda3 5.1.0 installer
+export PATH="/anaconda3/bin:$PATH"
+
+# Anaconda3 installation
+export PATH="$HOME/anaconda3/bin:$PATH"
+
+# ctags
+alias ctags="`brew --prefix`/bin/ctags"
+
+export PATH=/usr/local/bin:$PATH
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/brinon/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/brinon/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/brinon/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/brinon/google-cloud-sdk/completion.zsh.inc'; fi
+
+# remove all .pyc and __pychache__ folders
+pyclean () {
+  find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf
+}
+
+
