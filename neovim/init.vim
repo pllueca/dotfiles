@@ -29,6 +29,8 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'ervandew/supertab'
 NeoBundle 'zah/nim.vim'
+NeoBundle 'kassio/neoterm'
+NeoBundle 'ludovicchabant/vim-gutentags'
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
@@ -66,6 +68,8 @@ let NERDTreeIgnore = ['\.pyc$', '.DS_Store']
 
 :inoremap jj <Esc>
 :inoremap JJ <Esc>
+
+"nnoremap <Esc> <NOP>
 
 " map ; to : and viceversa
 nnoremap : ;
@@ -155,8 +159,8 @@ fun! JumpToDef()
 endf
 
 " Jump to tag
-nn <M-g> :call JumpToDef()<cr>
-ino <M-g> <esc>:call JumpToDef()<cr>i
+"nn <M-g> :call JumpToDef()<cr>
+"ino <M-g> <esc>:call JumpToDef()<cr>i
 
 " lightline
 let g:lightline = { 'colorscheme': 'wombat' } 
@@ -179,6 +183,9 @@ let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
 
 " Goto definition with F3
 map <F3> :YcmCompleter GoTo<CR>
+
+" ctags in ctrlP
+nnoremap <c-[> :CtrlPTag<cr>
 
 "use system clipboard
 set clipboard=unnamed
