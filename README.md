@@ -32,5 +32,15 @@ ln -s -f ~/dotfiles/tmux/tmux.conf.local ~/.tmux.conf.local
 ```
 
 ## ZSH
+* Ubuntu
+```bash
+sudo apt-get update && sudo apt-get -y install zsh
+
+# make zsh default shell
+chsh -s /bin/zsh
+
+# install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+```
 
 

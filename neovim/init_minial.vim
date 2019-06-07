@@ -1,5 +1,13 @@
+set nocompatible
+
 syntax on
 syntax enable
+set number
+
+filetype plugin on
+
+filetype plugin indent on
+set autoindent
 
 set path+=**
 
@@ -34,8 +42,6 @@ function! SetupPython()
 endfunction
 autocmd Filetype python call SetupPython()
 
-filetype plugin indent on
-set autoindent
 
 "
 "use system clipboard

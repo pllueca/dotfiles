@@ -31,6 +31,7 @@ NeoBundle 'ervandew/supertab'
 NeoBundle 'zah/nim.vim'
 NeoBundle 'kassio/neoterm'
 NeoBundle 'ludovicchabant/vim-gutentags'
+NeoBundle 'tpope/vim-surround'
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
@@ -50,8 +51,12 @@ NeoBundleCheck
 syntax on
 syntax enable
 
+set path+=**
+
 set number
 set pastetoggle=<F3>
+
+
 
 "NERDTree
 let NERDTreeMinimalUI = 1
@@ -82,6 +87,8 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+nnoremap <C-T> :tabnew<cr>
 
 set softtabstop=2 tabstop=2 shiftwidth=2 expandtab
 function! SetupPython()
@@ -143,8 +150,10 @@ let g:python_pep8_hanging_indent_width = 4
 
 " automagically set indent to 2 for python
 autocmd FileType python setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
-" automagically run Neomake on save
+"
+" automagically run Neomake and Neoformat on save
 autocmd! BufWritePost * Neomake
+"autocmd! BufWritePost * Neoformat
 
 let b:delimitMate_autoclose = 1 
 
