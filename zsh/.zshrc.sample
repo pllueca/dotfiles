@@ -1,5 +1,4 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# If you come from bash you might have to change your $PATH.  export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/brinon/.oh-my-zsh
@@ -33,10 +32,10 @@ export UPDATE_ZSH_DAYS=7
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
- COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -55,8 +54,10 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-#
-plugins=(git docker github osx pip python)
+
+export FZF_BASE=/usr/local/opt/fzf/
+
+plugins=(git docker github osx pip python fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -67,6 +68,8 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+
+export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/lib"
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -80,12 +83,24 @@ export EDITOR="nvim"
 
 #bindkey -v 
 
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
 
+# ssh
+export SSH_KEY_PATH="~/.ssh/id_rsa"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
 #
 # Example aliases
  alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias imgcat="sh ~/Repos/imgcat/imgcat.sh"
+
+#export PATH="/Users/brinon/anaconda2/bin:$PATH"
+export PYTHONPATH="/Users/brinon/crowdAI/inca:$PYTHONPATH"
 
 
 # some alias
@@ -94,6 +109,11 @@ alias bim='vim'
 alias py="python"
 alias ipy="ipython"
 alias incaenv="source activate inca-env"
+alias incapy="docker-compose -f ~/crowdai/inca/docker-compose.yml run --rm inca-tasks python"
+alias incaipy="docker-compose -f ~/crowdai/inca/docker-compose.yml run --rm inca-tasks ipython"
+
+# ruby
+alias aztecr='docker-compose -f ~/crowdAI/aztec_platform/docker-compose.yml run --rm web rails c'
 
 # docker-compose
 alias docker-stop-all='docker stop $(docker ps -a -q)'
@@ -101,21 +121,43 @@ alias docker-rm-all='docker rm $(docker ps -a -q)'
 alias docker-rm-imgs='sudo docker rmi $(sudo docker images -q)'
 
 alias dc="docker-compose"
+alias dcdown="docker-compose down"
+alias dcup="docker-compose up"
+alias dcbuild="docker-compose build"
+alias dcreload="docker-compose down && docker-compose up"
+alias jup="docker-compose -f .jupyter-docker-compose.yml up"
 
 function dcrun() {
   docker-compose run --rm "$@"
+}
+
+funtion yell() {
+  echo "hello!!! $@  bye!"
 }
 
 alias k="kubectl"
 
 # random usefull
 alias reload="source ~/.zshrc"
-alias myip="curl ipinfo.io/ip"
+alias myip="curl -s ipinfo.io/ip"
 alias inca="cd ~/crowdai/inca"
+alias aztec="cd ~/crowdai/aztec_platform"
 
 # editor
 alias vim="nvim"
 alias v="nvim"
+#alias vim="$MACVIM"
+
+# inca
+alias inca_test="docker-compose run --rm inca-tasks python -m unittest discover -v inca/t/unit/"
+alias inca_lint="docker-compose run --rm inca-tasks python inca/unit_tests/test_lint.py"
+
+
+# ssh agent
+eval $(ssh-agent -s)
+#ssh-add -K ~/.ssh/github_rsa
+ssh-add -K ~/.ssh/id_rsa
+ssh-add -K ~/.ssh/crowdai-master.pem
 
 # pip zsh completion start
 function _pip_completion {
@@ -129,6 +171,12 @@ function _pip_completion {
 compctl -K _pip_completion pip
 # pip zsh completion end
 
+
+
+# github
+export HOMEBREW_GITHUB_API_TOKEN=
+
+
 # Go
 export GOPATH=/Users/brinon/Repos/Go
 
@@ -137,6 +185,13 @@ export PATH=/Users/brinon/.nimble/bin:$PATH
 
 alias ...=../..
 export PATH="/usr/local/opt/curl/bin:$PATH"
+
+inca-pdb() {
+    docker-compose -f ~/crowdai/inca/docker-compose.yml exec $1 bash -c "sleep 0.1 && rlwrap nc ${3:-127.0.0.1} ${2:-4444}"
+}
+#
+# added by Anaconda3 5.0.1 installer
+export PATH="/Users/brinon/anaconda3/bin:$PATH"
 
 # added by Anaconda2 5.0.1 installer
 export PATH="/Users/brinon/anaconda2/bin:$PATH"
@@ -147,16 +202,17 @@ export PATH="/anaconda3/bin:$PATH"
 # Anaconda3 installation
 export PATH="$HOME/anaconda3/bin:$PATH"
 
-# ctags
+export PATH="$HOME/.local/bin:$PATH"
+
+# inca binaries
+export PATH="$HOME/crowdAI/inca/bin:$PATH"
+
+export PATH="$HOME/bin:$PATH"
+
+# ctagsGG
 alias ctags="`brew --prefix`/bin/ctags"
 
 export PATH=/usr/local/bin:$PATH
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/brinon/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/brinon/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/brinon/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/brinon/google-cloud-sdk/completion.zsh.inc'; fi
 
 # remove all .pyc and __pychache__ folders
 pyclean () {
@@ -164,3 +220,4 @@ pyclean () {
 }
 
 
+export PATH="/usr/local/opt/terraform@0.11/bin:$PATH"
