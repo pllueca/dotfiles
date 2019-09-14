@@ -1,0 +1,21 @@
+#! /bin/bash
+
+# bootstrap an ubuntu machine
+# installs and configure vim, zsh, tmux
+
+sudo apt update
+sudo apt upgrade -y
+sudo apt install -y git vim htop tmux wget curl zsh fzf
+
+git clone https://github.com/Brinon/dotfiles.git ~
+
+# zsh
+chsh -s /bin/zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+cp ~/dotfiles/zsh/.zshrc.sample ~/dotfiles/zsh/.zshrc
+ln -f ~/dotfiles/zsh/.zshrc ~/.zshrc
+
+# vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+ln -f ~/dotfiles/vim/vimrc ~/.vimrc
+
