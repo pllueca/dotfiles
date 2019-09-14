@@ -1,0 +1,29 @@
+#! /bin/bash
+set -x
+
+# bootstrap an ubuntu machine
+# installs and configure vim, zsh, tmux
+
+sudo apt update
+sudo apt upgrade
+sudo apt install -y git vim htop tmux wget curl zsh fzf python3-pip
+git clone https://github.com/Brinon/dotfiles.git ~
+
+# zsh
+chsh -s /bin/zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+cp ~/dotfiles/zsh/.zshrc.sample ~/dotfiles/zsh/.zshrc
+ln -f ~/dotfiles/zsh/.zshrc ~/.zshrc
+
+# vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+ln -f ~/dotfiles/vim/vimrc ~/.vimrc
+
+# powerline (used by zsh and vim)
+pip3 install --user git+git://github.com/Lokaltog/powerline
+
+# powerline fonts
+wget https://github.com/Lokaltog/powerline/raw/develop/font/PowerlineSymbols.otf https://github.com/Lokaltog/powerline/raw/develop/font/10-powerline-symbols.conf
+mkdir -p ~/.fonts/ && mv PowerlineSymbols.otf ~/.fonts/
+fc-cache -vf ~/.fonts
+mkdir -p ~/.config/fontconfig/conf.d/ && mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/

@@ -22,7 +22,6 @@ Plug 'tpope/vim-surround'
 
 " Required:
 call plug#end()
-PlugUpdate
 
 " Required:
 filetype plugin indent on
@@ -190,4 +189,4 @@ com! FormatJSON %!python -m json.tool
 com! Fmt Neoformat
 
 "Crowdai specific
-source ~/.config/nvim/crowdai.vim
+"source ~/.config/nvim/crowdai.vim
