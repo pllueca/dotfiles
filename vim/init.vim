@@ -1,4 +1,7 @@
 "NeoBundle Scripts-----------------------------
+"
+
+
 
 if has('vim_starting')
   " Required:
@@ -13,28 +16,20 @@ call neobundle#begin(expand('~/.config/nvim/bundle'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Add or remove your Bundles here:
-NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'neomake/neomake'
-NeoBundle 'sbdchd/neoformat'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'easymotion/vim-easymotion'
-NeoBundle 'aykamko/vim-python-pep8-indent'
 NeoBundle 'Raimondi/delimitMate' 
-NeoBundle 'tpope/vim-sleuth'
-NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'Valloric/YouCompleteMe'
-NeoBundle 'ervandew/supertab'
-NeoBundle 'zah/nim.vim'
-NeoBundle 'kassio/neoterm'
 NeoBundle 'ludovicchabant/vim-gutentags'
 NeoBundle 'tpope/vim-surround'
+NeoBundle 'Valloric/YouCompleteMe'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'psf/black'
 
-" You can specify revision/branch/tag.
-NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+
 
 " Required:
 call neobundle#end()
@@ -56,6 +51,7 @@ set path+=**
 set number
 set pastetoggle=<F3>
 
+colorscheme gruvbox
 
 
 "NERDTree
@@ -70,11 +66,11 @@ let NERDTreeIgnore = ['\.pyc$', '.DS_Store']
 "noremap <Left> <NOP>
 "noremap <Right> <NOP>
 "inoremap <esc> <NOP>
+"nnoremap <Esc> <NOP>
 
 :inoremap jj <Esc>
 :inoremap JJ <Esc>
 
-"nnoremap <Esc> <NOP>
 
 " map ; to : and viceversa
 nnoremap : ;
@@ -89,15 +85,6 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 nnoremap <C-T> :tabnew<cr>
-
-set softtabstop=2 tabstop=2 shiftwidth=2 expandtab
-function! SetupPython()
-  setlocal softtabstop=2
-  setlocal tabstop=2
-  setlocal shiftwidth=2
-  setlocal expandtab
-endfunction
-autocmd Filetype python call SetupPython()
 
 " split panes
 set splitright
@@ -123,7 +110,9 @@ map <leader>b <leader><leader>b
 
 " code folding
 set foldmethod=indent
-set foldlevel=99
+set foldlevel=80
+set colorcolumn=80
+
 
 "open nerdtree when vim is run w/out args
 autocmd StdinReadPre * let s:std_in=1
@@ -139,33 +128,14 @@ set wildignore=*.swp,*.pyc,*.bak,*png,*tif
 
 filetype plugin indent on
 set autoindent
+set tabstop=4
+set shiftwidth=4
+set expandtab
 
-set colorcolumn=100
-
-" configure hanging indent in Python to 4 spaces per Google's pylintrc, e.g.
-" function_call(
-"     arg1, arg2, arg3)
-" ^^^^
-let g:python_pep8_hanging_indent_width = 4
-
-" automagically set indent to 2 for python
-autocmd FileType python setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
-"
-" automagically run Neomake and Neoformat on save
-autocmd! BufWritePost * Neomake
-"autocmd! BufWritePost * Neoformat
 
 let b:delimitMate_autoclose = 1 
 
 
-" nim
-fun! JumpToDef()
-  if exists("*GotoDefinition_" . &filetype)
-    call GotoDefinition_{&filetype}()
-  else
-    exe "norm! \<C-]>"
-  endif
-endf
 
 " Jump to tag
 "nn <M-g> :call JumpToDef()<cr>
@@ -189,6 +159,10 @@ let g:ycm_complete_in_strings = 1 " Completion in string
 
 let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
+let g:ycm_server_python_interpreter = 'python3.9'
+let g:ycm_global_ycm_extra_conf = "/Users/pllueca/.ycm_extra_conf.py"
 
 " Goto definition with F3
 map <F3> :YcmCompleter GoTo<CR>
@@ -208,7 +182,4 @@ endif
 
 " custom functions and shit
 com! FormatJSON %!python -m json.tool
-com! Fmt Neoformat
-
-"Crowdai specific
-source ~/.config/nvim/crowdai.vim
+com! Fmt :Black

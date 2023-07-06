@@ -44,3 +44,22 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 ```
 
 
+# Python
+Install pyenv and pyenv-virtualenv
+
+```
+brew install pyenv
+git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
+```
+
+# neovim and neobundle
+```
+brew install neovim
+curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh > install.sh
+sh ./install.sh && rm install.sh
+
+pip install ...
+
+```
+
+

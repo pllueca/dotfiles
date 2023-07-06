@@ -1,7 +1,7 @@
 [user]
   name = Pablo Llueca
-  email = pau@crowdai.com
-  username = Brinon
+  email = pablo.llueca@gmail.com
+  username = pllueca
 [core]
   editor = nvim
   excludesfile = ~/.gitignore
@@ -17,4 +17,6 @@
 
   wip = !git add -u && git commit -m "WIP"
   undo = reset HEAD~1 --mixed
+
+  st = status
 
